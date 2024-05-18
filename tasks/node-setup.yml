@@ -1,0 +1,12 @@
+- name: install volta
+  become: true
+  shell: curl https://get.volta.sh | bash
+  tags:
+  - install
+  - node
+
+- name: install node
+  shell: volta install node
+  tags:
+  - install
+  - node

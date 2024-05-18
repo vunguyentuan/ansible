@@ -1,0 +1,22 @@
+- name: Install core packages
+  become: true
+  community.general.pacman:
+    name: [ "unzip",  "stow", "eza", "bat", "zoxide", "zsh", "curl", "rustup"]
+    state: present
+
+
+- name: Install build-essential
+  become: true
+  community.general.pacman:
+    name: ["cmake", "gcc", "clang"]
+  tags:
+    - install
+    - neovim
+    - core
+
+- name: Install productivity packages
+  become: true
+  community.general.pacman:
+    name: [ "tmux", "fzf", "fd", "sd", "ripgrep", "docker"]
+    state: present
+

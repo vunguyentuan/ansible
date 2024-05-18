@@ -1,0 +1,29 @@
+- name: Git personal setup email
+  git_config:
+    name: user.email
+    scope: global
+    value: "tuanvu.vn007@gmail.com"
+  tags:
+  - git-personal
+- name: Git personal setup name
+  git_config:
+    name: user.name
+    scope: global
+    value: "Vu Nguyen"
+  tags:
+  - git-personal
+
+- name: Git cognizant setup email
+  git_config:
+    name: user.email
+    scope: global
+    value: "vu.nguyen2@cognizant.com"
+  tags:
+  - git-cognizant
+- name: Git cognizant setup name
+  git_config:
+    name: user.name
+    scope: global
+    value: "Vu Nguyen"
+  tags:
+  - git-cognizant

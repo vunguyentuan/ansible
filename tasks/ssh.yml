@@ -1,0 +1,66 @@
+- name: Ensure .ssh directory exists.
+  file:
+    path: "{{ personal_dest_key | dirname }}"
+    mode: 0700
+    state: directory
+  tags:
+    - dotfiles
+    - install
+    - ssh
+
+- name: Install personal ssh key
+  copy:
+    src: "{{ personal_source_key }}"
+    dest: "{{ personal_dest_key }}"
+    mode: 0600
+  tags:
+    - dotfiles
+    - install
+    - ssh
+
+- name: Install personal ssh key public
+  copy:
+    src: "{{ personal_source_key }}.pub"
+    dest: "{{ personal_dest_key }}.pub"
+    mode: 0644
+  tags:
+    - dotfiles
+    - install
+    - ssh
+
+- name: Install work ssh key
+  copy:
+    src: "{{ work_source_key }}"
+    dest: "{{ work_dest_key }}"
+    mode: 0600
+  tags:
+    - dotfiles
+    - install
+    - ssh
+
+- name: Install work ssh key public
+  copy:
+    src: "{{ work_source_key }}.pub"
+    dest: "{{ work_dest_key }}.pub"
+    mode: 0644
+  tags:
+    - dotfiles
+    - install
+    - ssh
+
+- name: SSH config 
+  copy:
+    src: "{{ ssh_config }}"
+    dest: "{{ lookup('env', 'HOME') }}/.ssh/config"
+  tags:
+    - dotfiles
+    - install
+    - ssh
+
+- name: Set personal authorized key took from file
+  authorized_key:
+    user: "{{ lookup('env', 'USER') }}"
+    state: present
+    key: "{{ lookup('file', item) }}"
+  with_fileglob:
+  - "{{ lookup('env', 'HOME') }}/.ssh/*.pub"

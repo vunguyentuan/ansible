@@ -1,0 +1,23 @@
+- hosts: localhost
+  vars:
+    ssh_config: "./.ssh/config"
+
+    work_source_key: "./.ssh/gitlab_cognizant_24"
+    work_dest_key: "{{ lookup('env', 'HOME') }}/.ssh/gitlab_cognizant_24"
+
+    personal_source_key: "./.ssh/id_ed25519"
+    personal_dest_key: "{{ lookup('env', 'HOME') }}/.ssh/id_ed25519"
+  pre_tasks:
+  - name: Run the equivalent of "pacman -Syu" as a separate step
+    become: true
+    community.general.pacman:
+      update_cache: true
+      upgrade: true
+
+  tasks:
+    - import_tasks: tasks/ssh.yml
+    - import_tasks: tasks/git-setup.yml
+    - import_tasks: tasks/core-setup.yml
+    - import_tasks: tasks/node-setup.yml
+    - import_tasks: tasks/dotfiles.yml
+

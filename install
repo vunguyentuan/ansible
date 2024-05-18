@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+sudo pacman -S openssh ansible
+sudo systemctl enable sshd
+sudo systemctl start sshd
