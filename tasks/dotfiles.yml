@@ -11,7 +11,7 @@
     - dotfiles
     - stow
 - name: Stow dotfiles
-  shell: cd $HOME/dotfiles && stow --adopt .
+  shell: cd $HOME/dotfiles && stow .
   tags:
     - install
     - dotfiles
