@@ -4,7 +4,6 @@
     name: [ "unzip",  "stow", "eza", "bat", "zoxide", "zsh", "curl", "rustup"]
     state: present
 
-
 - name: Install build-essential
   become: true
   community.general.pacman:
@@ -20,3 +19,21 @@
     name: [ "tmux", "fzf", "fd", "sd", "ripgrep", "docker"]
     state: present
 
+- name: Install docker
+  become: true
+  community.general.pacman:
+    name: [ "docker"]
+    state: present
+
+
+- name: enable and start docker.service
+  systemd:
+    name: docker
+    enabled: yes
+    state: started
+
+- name: add the user to docker group
+  user:
+    name: "{{ lookup('env', 'USER') }}"
+    groups: docker
+    append: yes
