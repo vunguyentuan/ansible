@@ -16,7 +16,7 @@
 - name: Install productivity packages
   become: true
   community.general.pacman:
-    name: [ "tmux", "fzf", "fd", "sd", "ripgrep", "docker"]
+    name: [ "starship", "tmux", "fzf", "fd", "sd", "ripgrep", "docker", "jq", "k9s", "kubectl"]
     state: present
 
 - name: Install docker
